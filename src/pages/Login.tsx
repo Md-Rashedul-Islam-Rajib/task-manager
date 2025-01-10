@@ -12,6 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { useAppDispatch } from "@/redux/hooks";
+import { login } from "@/redux/features/auth/authSlice";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -24,6 +26,8 @@ const loginSchema = z.object({
 type TLogin = z.infer<typeof loginSchema>;
 
 const Login = () => {
+
+  const dispatch = useAppDispatch();
   const form = useForm<TLogin>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -35,6 +39,8 @@ const Login = () => {
 
   const onSubmit = (data: TLogin) => {
     console.log(data);
+    dispatch(login(data));
+    
   };
   return (
     <Card className="w-[350px] mx-auto">
@@ -50,7 +56,7 @@ const Login = () => {
                 <FormItem className="mb-4">
                   <FormLabel className="">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="email" {...field} />
+                    <Input placeholder="email" autoComplete="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -63,7 +69,7 @@ const Login = () => {
                 <FormItem className="mb-4">
                   <FormLabel>password</FormLabel>
                   <FormControl>
-                    <Input placeholder="password" type="password" {...field} />
+                    <Input placeholder="password" type="password" autoComplete="password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

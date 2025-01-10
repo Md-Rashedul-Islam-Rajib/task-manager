@@ -19,6 +19,14 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { useAppDispatch } from "@/redux/hooks";
+import { register } from "@/redux/features/auth/authSlice";
+
+/**
+ * @constant registerSchema is a zod validation schema for the register form
+ * @type TRegister is a type of the registerSchema
+ * @function onSubmit is a function that dispatches the register action with the user data
+ */
 
 const registerSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -28,9 +36,12 @@ const registerSchema = z.object({
   role: z.enum(["admin", "manager", "user", ""]),
 });
 
-type TRegister = z.infer<typeof registerSchema>;
+export type TRegister = z.infer<typeof registerSchema>;
 
 const Register = () => {
+
+    const dispatch = useAppDispatch();
+
   const form = useForm<TRegister>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -40,8 +51,10 @@ const Register = () => {
     },
   });
 
-  const onSubmit = (data: TRegister) => {
-    console.log(data);
+  const onSubmit = (user: TRegister) => {
+      console.log(user);
+        dispatch(register(user));
+
   };
   return (
     <Card className="w-[350px] mx-auto">
@@ -56,7 +69,7 @@ const Register = () => {
                 <FormItem className="mb-4">
                   <FormLabel className="">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="email" {...field} />
+                    <Input placeholder="email" autoComplete="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -69,7 +82,7 @@ const Register = () => {
                 <FormItem className="mb-4">
                   <FormLabel>password</FormLabel>
                   <FormControl>
-                    <Input placeholder="password" type="password" {...field} />
+                    <Input placeholder="password" type="password" autoComplete="password" { ...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
