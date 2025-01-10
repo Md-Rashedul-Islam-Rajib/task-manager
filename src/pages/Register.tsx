@@ -19,8 +19,10 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { register } from "@/redux/features/auth/authSlice";
+import { RootState } from "@/redux/store";
+import { useNavigate } from "react-router";
 
 /**
  * @constant registerSchema is a zod validation schema for the register form
@@ -40,6 +42,23 @@ export type TRegister = z.infer<typeof registerSchema>;
 
 const Register = () => {
 
+
+      const { user } = useAppSelector((state: RootState) => state.auth);
+    
+    const navigate = useNavigate();
+    
+    const getRedirect = () => {
+        switch (user?.role) {
+            case "admin":
+                return '/admin';
+            case 'manager':
+                return '/manager';
+            case 'user':
+                return '/user';
+            default:
+                return '/login'
+        }
+    }
     const dispatch = useAppDispatch();
 
   const form = useForm<TRegister>({
@@ -54,7 +73,7 @@ const Register = () => {
   const onSubmit = (user: TRegister) => {
       console.log(user);
         dispatch(register(user));
-
+        navigate(getRedirect(),{replace:true})
   };
   return (
     <Card className="w-[350px] mx-auto">

@@ -12,7 +12,7 @@ const AppRoutes = () => {
   const { isAuthenticated, user } = useAppSelector((state: RootState) => state.auth);
 
 
-  const getRedirect = () => {
+const getRedirect = () => {
     switch (user?.role) {
       case "admin":
         return '/admin';

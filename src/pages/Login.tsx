@@ -12,8 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { login } from "@/redux/features/auth/authSlice";
+import { RootState } from "@/redux/store";
+import { useNavigate } from "react-router";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
@@ -27,6 +29,22 @@ type TLogin = z.infer<typeof loginSchema>;
 
 const Login = () => {
 
+    const {user } = useAppSelector((state: RootState) => state.auth);
+  
+  const navigate = useNavigate();
+  
+  const getRedirect = () => {
+    switch (user?.role) {
+      case "admin":
+        return '/admin';
+      case 'manager':
+        return '/manager';
+      case 'user':
+        return '/user';
+      default:
+        return '/login'
+    }
+  }
   const dispatch = useAppDispatch();
   const form = useForm<TLogin>({
     resolver: zodResolver(loginSchema),
@@ -40,6 +58,9 @@ const Login = () => {
   const onSubmit = (data: TLogin) => {
     console.log(data);
     dispatch(login(data));
+     navigate(getRedirect(), { replace: true });
+    
+
     
   };
   return (
