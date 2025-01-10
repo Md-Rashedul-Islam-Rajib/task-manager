@@ -1,29 +1,30 @@
 import AdminLayout from "@/layouts/AdminLayout";
 import ManagerLayout from "@/layouts/ManagerLayout";
 import UserLayout from "@/layouts/UserLayout";
-import Login from "@/pages/Login";
+import Login from "@/pages/public/Login";
 
-import Register from "@/pages/Register";
+import Register from "@/pages/public/Register";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { Routes, Route, Navigate } from "react-router";
 
 const AppRoutes = () => {
-  const { isAuthenticated, user } = useAppSelector((state: RootState) => state.auth);
+  const { isAuthenticated, user } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
-
-const getRedirect = () => {
+  const getRedirect = () => {
     switch (user?.role) {
       case "admin":
-        return '/admin';
-      case 'manager':
-        return '/manager';
-      case 'user': 
-        return '/user';
+        return "/admin";
+      case "manager":
+        return "/manager";
+      case "user":
+        return "/user";
       default:
-        return '/login'
+        return "/login";
     }
-  }
+  };
   return (
     <Routes>
       {/* Public Routes */}

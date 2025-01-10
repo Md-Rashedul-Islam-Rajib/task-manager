@@ -2,14 +2,14 @@ import "./App.css";
 import AdminLayout from "./layouts/AdminLayout";
 import ManagerLayout from "./layouts/ManagerLayout";
 import UserLayout from "./layouts/UserLayout";
-import Login from "./pages/Login";
+import Login from "./pages/public/Login";
 import { useAppSelector } from "./redux/hooks";
 import { RootState } from "./redux/store";
 
-
-
 function App() {
-const { isAuthenticated, user } = useAppSelector((state: RootState) => state.auth);
+  const { isAuthenticated, user } = useAppSelector(
+    (state: RootState) => state.auth
+  );
   return (
     <>
       {isAuthenticated && user.role === "admin" ? (
