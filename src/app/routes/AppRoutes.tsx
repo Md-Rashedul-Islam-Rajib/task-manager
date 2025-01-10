@@ -2,7 +2,8 @@ import App from "@/App";
 import AdminLayout from "@/layouts/AdminLayout";
 import ManagerLayout from "@/layouts/ManagerLayout";
 import UserLayout from "@/layouts/UserLayout";
-import { Login } from "@/pages/Login";
+import Login from "@/pages/Login";
+
 import Register from "@/pages/Register";
 import { Routes, Route } from "react-router";
 

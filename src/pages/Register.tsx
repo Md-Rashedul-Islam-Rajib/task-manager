@@ -44,7 +44,7 @@ const Register = () => {
     console.log(data);
   };
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[350px] mx-auto">
       <Form {...form}>
         <CardTitle className="text-4xl my-5">Register</CardTitle>
         <CardContent>
@@ -53,7 +53,7 @@ const Register = () => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="mb-4">
                   <FormLabel className="">Email</FormLabel>
                   <FormControl>
                     <Input placeholder="email" {...field} />
@@ -66,7 +66,7 @@ const Register = () => {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="mb-4">
                   <FormLabel>password</FormLabel>
                   <FormControl>
                     <Input placeholder="password" type="password" {...field} />
@@ -80,7 +80,7 @@ const Register = () => {
               control={form.control}
               name="role"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="mb-4">
                   <FormLabel>Role</FormLabel>
                   <Select
                     onValueChange={field.onChange}

@@ -2,7 +2,8 @@ import "./App.css";
 import AdminLayout from "./layouts/AdminLayout";
 import ManagerLayout from "./layouts/ManagerLayout";
 import UserLayout from "./layouts/UserLayout";
-import { Login } from "./pages/Login";
+import Login from "./pages/Login";
+
 
 function App() {
   const user = {
