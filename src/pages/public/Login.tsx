@@ -66,7 +66,7 @@ const Login = () => {
   return (
     <Card className="w-[350px] mx-auto">
       <Form {...form}>
-        <CardTitle className="text-4xl my-5">Login</CardTitle>
+        <CardTitle className="text-4xl my-5 text-center">Login</CardTitle>
         <CardContent>
           <form  onSubmit={form.handleSubmit(onSubmit)}>
             <FormField

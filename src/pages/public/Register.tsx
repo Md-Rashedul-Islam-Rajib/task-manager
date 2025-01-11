@@ -78,7 +78,7 @@ const Register = () => {
   return (
     <Card className="w-[350px] mx-auto">
       <Form {...form}>
-        <CardTitle className="text-4xl my-5">Register</CardTitle>
+        <CardTitle className="text-4xl my-5 text-center">Register</CardTitle>
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
